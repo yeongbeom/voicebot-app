@@ -107,35 +107,6 @@
 			.map((result: any) => result[0])
 			.map((result) => result.transcript)
 			.join('');
-
-		if (results[0].isFinal) {
-			if (text.includes('테라피') || text.includes('날씨') || text.includes('알람')) {
-				command = '/apps';
-				cmdResText = '서비스 화면으로 안내합니다.';
-				cmdResEmotion = $expression.neutral;
-			} else if (text.includes('시계')) {
-				command = '/apps/clock';
-				cmdResText = '시계 화면으로 안내합니다.';
-				cmdResEmotion = $expression.neutral;
-			}
-
-			if (text.includes('아파') && !continued) {
-				command = 'emergency';
-				cmdResText = '많이 아프세요?';
-				cmdResEmotion = $expression.neutral;
-
-				continued = true;
-			} else if (text.includes('아파') && continued) {
-				command = 'emergency';
-				cmdResText = '응급상황이 탐지되어, 비상연락처로 연락하겠습니다.';
-				cmdResEmotion = $expression.worry;
-
-				continued = false;
-			}
-
-			$say = text;
-		}
-
 		$heard = text;
 	};
 	const handleSpeechOnend = () => {
